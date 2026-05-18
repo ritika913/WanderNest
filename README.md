@@ -71,7 +71,26 @@ npm install
 
 ---
 
-### 4. Initialize the Database (Optional)
+### 4. Set Up Environment Variables
+
+Create a `.env` file in the root of the project and add the following variables. Replace the placeholder values with your own credentials.
+
+```env
+# MongoDB Atlas Connection String
+ATLASDB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/wanderlust?retryWrites=true&w=majority
+
+# Cloudinary Credentials
+CLOUD_NAME=your_cloud_name
+CLOUD_API_KEY=your_api_key
+CLOUD_API_SECRET=your_api_secret
+
+# Session Secret Key
+SECRET=a_very_long_and_random_string_for_sessions
+```
+
+---
+
+### 5. Initialize the Database (Optional)
 
 To populate the database with sample listings, run the initialization script:
 
@@ -81,7 +100,7 @@ node init/index.js
 
 ---
 
-### 5. Run the Application
+### 6. Run the Application
 
 Start the development server using nodemon:
 
