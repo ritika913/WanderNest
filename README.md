@@ -23,7 +23,9 @@ Image Hosting	Cloudinary API, Multer
 Deployment	Render
 Validation	Joi
 Version Control	Git & GitHub
+
 📂 Repository Structure
+
 Wanderlust/
 │
 ├── controllers/
