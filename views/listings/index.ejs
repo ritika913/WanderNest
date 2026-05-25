@@ -1,90 +1,190 @@
 <% layout("/layouts/boilerplate") %> 
 
     <style>
-        #filters{
-            display:flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .filter{
-            text-align:center;
-            margin-right: 2rem;
-            margin-top: 2rem;
-            opacity:0.7;
-        }
-        .filter:hover{
-           opacity: 1; 
-           cursor:pointer;
-        }
-        .filter p{
-            font-size: 0.8rem;
-        }
-        .tax-info{
-            display: none;
-        }
-        .tax-toggle{
-            border:1px solid black;
-            border-radius: 1rem;
-            height: 3.2rem;
-            padding: 1rem;
-            margin-left: 3rem;
-            display: flex;
-            align-items: center;
-        }
+ .filters-wrapper{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+
+    margin-top:1rem;
+    position:relative;
+}
+
+/* FILTER CONTAINER */
+
+#filters{
+    display:flex;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+
+    gap:2rem;
+
+    flex:1;
+
+    scrollbar-width:none;
+}
+
+#filters::-webkit-scrollbar{
+    display:none;
+}
+
+/* FILTER */
+
+.filter{
+    text-align:center;
+    min-width:80px;
+
+    opacity:0.7;
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.filter:hover{
+    opacity:1;
+}
+
+.filter p{
+    font-size:0.8rem;
+}
+
+.filter i{
+    font-size:1.2rem;
+}
+
+/* TAX TOGGLE */
+
+.tax-toggle{
+    border:1px solid #dddddd;
+
+    border-radius:1rem;
+
+    padding:0.8rem 1rem;
+
+    display:flex;
+    align-items:center;
+    gap:1rem;
+
+    white-space:nowrap;
+
+    height:fit-content;
+}
+
+/* ARROW BUTTONS */
+
+.scroll-btn{
+    border:none;
+
+    background:white;
+
+    width:2rem;
+    height:2rem;
+
+    border-radius:50%;
+
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+
+    cursor:pointer;
+
+    flex-shrink:0;
+}
+
+.scroll-btn:hover{
+    background:#f7f7f7;
+}
+
+/* TAX INFO */
+
+.tax-info{
+    display:none;
+}
     </style>
 
+ <div class="filters-wrapper">
+
+    <!-- LEFT ARROW -->
+    <button class="scroll-btn left-btn" onclick="scrollFilters(-300)">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <!-- FILTERS -->
     <div id="filters">
+
         <div class="filter">
             <div><i class="fa-solid fa-fire"></i></div>
             <p>Trending</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-bed"></i></div>
             <p>Rooms</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-mountain-city"></i></div>
             <p>Iconic Cities</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-mountain"></i></div>
             <p>Mountains</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-brands fa-fort-awesome"></i></div>
             <p>Castle</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-person-swimming"></i></div>
             <p>Amazing Pools</p>
         </div>
-         <div class="filter">
+
+        <div class="filter">
             <div><i class="fa-solid fa-campground"></i></div>
             <p>Camping</p>
         </div>
-         <div class="filter">
+
+        <div class="filter">
             <div><i class="fa-solid fa-cow"></i></div>
             <p>Farms</p>
         </div>
-         <div class="filter">
+
+        <div class="filter">
             <div><i class="fa-solid fa-snowflake"></i></div>
             <p>Arctic</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-landmark-dome"></i></div>
             <p>Domes</p>
         </div>
+
         <div class="filter">
             <div><i class="fa-solid fa-sailboat"></i></div>
             <p>Boats</p>
         </div>
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-            <label class="form-check-label" for="switchCheckDefault">Display total after Taxes</label>
-            </div>
+
+    </div>
+
+    <!-- RIGHT ARROW -->
+    <button class="scroll-btn right-btn" onclick="scrollFilters(300)">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- TAX TOGGLE -->
+    <div class="tax-toggle">
+        <span>Display total after taxes</span>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input"
+                   type="checkbox"
+                   role="switch"
+                   id="switchCheckDefault">
         </div>
     </div>
+
+</div>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">   
         <% for (let listing of allListings) { %>
             <a href="/listings/<%= listing._id %>" class="listing-link">
@@ -116,4 +216,13 @@
             }
         }
     });
+</script>
+<script>
+    function scrollFilters(value){
+        document.getElementById("filters")
+                .scrollBy({
+                    left:value,
+                    behavior:"smooth"
+                });
+    }
 </script>
